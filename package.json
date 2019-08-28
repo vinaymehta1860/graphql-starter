@@ -4,16 +4,18 @@
   "description": "Simple Backend using GraphQL Server",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "author": "Vinay Mehta",
   "license": "MIT",
   "devDependencies": {
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.3",
+    "json-server": "^0.15.0",
     "mongodb": "^3.3.1",
     "nodemon": "^1.19.1"
   }
