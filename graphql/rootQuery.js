@@ -4,36 +4,34 @@ const {
 	GraphQLNonNull,
 	GraphQLList
 } = require('graphql');
-const axios = require('axios');
 
-// const { db } = require('../server');
-const { Person } = require('./types');
+const { PersonType } = require('./types');
+const Person = require('../models/Person');
 
 /**
  * This is the rootQuery for GraphQL. For now it defines the following queries:
  * 1. persons     : For getting all the persons
- * 2. person (id) : For getting a particular person by his id
+ * 2. person (firstName) : For getting a particular person by his first name
  */
 const RootQuery = new GraphQLObjectType({
 	name: 'RootQueryType',
 	fields: {
 		persons: {
-			type: new GraphQLList(Person),
+			type: new GraphQLList(PersonType),
 			args: {},
 			resolve(parentValue, args) {
-				return axios
-					.get('http://localhost:3000/persons')
-					.then(resp => resp.data)
-					.catch(err => console.log(err));
+				return Person.find({}).then(resp => {
+					return resp;
+				});
 			}
 		},
 		person: {
-			type: Person,
-			args: { id: { type: new GraphQLNonNull(GraphQLString) } },
+			type: PersonType,
+			args: { firstName: { type: new GraphQLNonNull(GraphQLString) } },
 			resolve(parentValue, args) {
-				return axios
-					.get(`http://localhost:3000/persons/${args.id}`)
-					.then(resp => resp.data);
+				return Person.findOne({ firstName: args.firstName }).then(resp => {
+					return resp;
+				});
 			}
 		}
 	}
