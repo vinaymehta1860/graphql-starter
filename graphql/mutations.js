@@ -5,7 +5,7 @@ const {
 	GraphQLNonNull
 } = require('graphql');
 
-const { PersonType } = require('./types');
+const PersonType = require('./types');
 const Person = require('../models/Person');
 
 const Mutation = new GraphQLObjectType({

@@ -17,6 +17,4 @@ const Person = new GraphQLObjectType({
 	})
 });
 
-module.exports = {
-	PersonType: Person
-};
+module.exports = Person;
